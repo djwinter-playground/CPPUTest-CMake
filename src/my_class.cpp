@@ -9,3 +9,4 @@ int MyClass::add(int a, int b) {
 int MyClass::subtract(int a, int b) {
     return a - b;
 }
+
