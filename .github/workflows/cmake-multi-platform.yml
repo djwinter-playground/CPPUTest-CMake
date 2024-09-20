@@ -104,7 +104,7 @@ jobs:
       run: zip -r coverage_report.zip build/coverage_report
 
     - name: Upload Artifact as Folder
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: coverage
         path: coverage_report.zip
