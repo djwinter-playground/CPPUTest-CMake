@@ -102,9 +102,9 @@ jobs:
     
     - name: Check files
       run: ls
-      
+
     - name: Zip the Folder
-      run: zip -r coverage_report.zip coverage_report
+      run: zip -r coverage_report.zip build/coverage_report
 
     - name: Upload Artifact as Folder
       uses: actions/upload-artifact@v3
