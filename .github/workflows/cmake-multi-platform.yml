@@ -100,6 +100,9 @@ jobs:
       run: |
         genhtml coverage_filtered.info --output-directory coverage_report
     
+    - name: Check files
+      run: ls
+      
     - name: Zip the Folder
       run: zip -r coverage_report.zip coverage_report
 
