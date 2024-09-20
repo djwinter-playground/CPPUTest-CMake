@@ -99,10 +99,13 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: |
         genhtml coverage_filtered.info --output-directory coverage_report
-  
+    
+    - name: Zip the Folder
+      run: zip -r coverage_report.zip coverage_report
+
     - name: Upload Artifact as Folder
       uses: actions/upload-artifact@v3
       with:
         name: coverage_report
-        path: coverage_report/index.html
+        path: coverage_report.zip
         retention-days: 30
