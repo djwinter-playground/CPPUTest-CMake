@@ -45,6 +45,9 @@ jobs:
             c_compiler: cl
 
     steps:
+    - name: Install apt Packages
+      run: sudo apt update && sudo apt install -y lcov
+
     - uses: actions/checkout@v4
 
     - name: Set reusable strings
