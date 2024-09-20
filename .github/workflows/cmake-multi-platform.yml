@@ -104,5 +104,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: coverage_report
-        path: coverage_report.zip
+        path: ./coverage/index.html
         retention-days: 30
