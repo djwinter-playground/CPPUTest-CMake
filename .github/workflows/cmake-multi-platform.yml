@@ -27,9 +27,6 @@ jobs:
         build_type: [Release]
         c_compiler: [gcc, clang, cl]
         include:
-          - os: windows-latest
-            c_compiler: cl
-            cpp_compiler: cl
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
@@ -37,6 +34,9 @@ jobs:
             c_compiler: clang
             cpp_compiler: clang++
         exclude:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
           - os: windows-latest
             c_compiler: gcc
           - os: windows-latest
@@ -76,12 +76,18 @@ jobs:
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: | 
-        ./tests/my_class_test |
+        ./tests/my_class_test
+      #run: ctest --build-config ${{ matrix.build_type }}
+
+    - name: Generate Coverage report
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: |
         lcov --capture --directory . --output-file coverage.info |
         lcov --remove coverage.info  --output-file coverage_filtered.info '/usr/*' '*/CppUTest/*' '*/Platforms/Gcc/*' '*/tests/*' |
         genhtml coverage_filtered.info --output-directory coverage_report
-
-      #run: ctest --build-config ${{ matrix.build_type }}
+  
     - name: Upload Artifact as Folder
       uses: actions/upload-artifact@v3
       with:
